@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head><title>Sudoku Solver</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<script src="./sudokuboard.js"></script>
+<style>
+
+h2 {
+    text-align: center;
+}
+div {
+	text-align: center;
+}
+
+table {
+	width: 100%;
+}
+table, tr, th, td {
+    text-align: center;
+	border: 1px solid black;
+	font-size: 20pt;
+}
+.grid-container {
+  display: grid;
+  text-align: center;
+  grid-template-columns: 25% 50% 25%;
+  padding: 10px;
+}
+</style>
+<h2 >Sudoku</h2>
+<script>
+
+document.getElementById("out").innerHTML = buildGUI($("table"));
+</script>
+<div class="grid-container">
+  <div class="grid-item" >a</div>
+  <div class="grid-item">
+	<table>
+	<tr>
+	<td>1</td><td>2</td><td>3</td>
+	</tr><tr>
+	<td>4</td><td>5</td><td>6</td>
+	</tr><tr>
+	<td>6</td><td>8</td><td>9</td>
+	</tr>
+	</table> 
+  </div>
+  <div class="grid-item">c</div>
+</div>
+
+<span width: 50%>
+</span>
+
+</body>
+</html>
