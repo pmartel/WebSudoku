@@ -22,6 +22,11 @@ table, tr, th, td {
 	border: 1px solid black;
 	font-size: 20pt;
 }
+input {
+    text-align: center;
+	border: none;
+	font-size: 20pt;
+}	
 .grid-container {
   display: grid;
   text-align: center;
@@ -30,16 +35,21 @@ table, tr, th, td {
 }
 </style>
 <h2 >Sudoku</h2>
+<!-- Angular JS might be useful as well as a text select on focus -->
 <script>
 
 document.getElementById("out").innerHTML = buildGUI($("table"));
 </script>
 <div class="grid-container">
-  <div class="grid-item" >a</div>
+  <div class="grid-item" >
+  <p><button >New</button></p>
+  <p><button >Load</button></p>
+  <p><button >Save</button></p>  
+  </div>
   <div class="grid-item">
 	<table>
 	<tr>
-	<td>1</td><td>2</td><td>3</td>
+	<td><input type="text" 	size= '1' maxlength="1" onfocus="this.select()"></input></td><td>2</td><td>3</td>
 	</tr><tr>
 	<td>4</td><td>5</td><td>6</td>
 	</tr><tr>
