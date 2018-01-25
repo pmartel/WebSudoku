@@ -41,3 +41,7 @@ function buildGUI(ta) {
 	// Return the GUI table
 	return $table;
 }
+
+function thisSelect(t){
+	t.select(1);  //selects the text, but it seems to set on exit
+}
