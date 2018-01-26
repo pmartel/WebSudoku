@@ -3,7 +3,7 @@
 <head><title>Sudoku Solver</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
+<body onload="newBoard();">
 <script src="./sudokuboard.js"></script>
 <style>
 
@@ -36,20 +36,20 @@ input {
 </style>
 <h2 >Sudoku</h2>
 <!-- Angular JS might be useful as well as a text select on focus -->
-<script>
 
-//document.getElementById("out").innerHTML = buildGUI($("table"));
-</script>
 <div class="grid-container">
   <div class="grid-item" >
-  <p><button >New</button></p>
+  <p><button  onclick="newBoard()";>New</button></p>
   <p><button >Load</button></p>
   <p><button >Save</button></p>  
   </div>
   <div class="grid-item">
-	<table>
+	<table id="board">
 	<tr>
-	<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 onkeypress="thisSelect(this)"></input></td><td>2</td><td>3</td>
+	<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 
+		onkeypress = "thisSelect(this)"
+		></input></td><td>2</td><td>3</td>
+		<!-- NG onchange="thisSelect(this)" -->
 	</tr><tr>
 	<td>4</td><td>5</td><td>6</td>
 	</tr><tr>
@@ -57,7 +57,7 @@ input {
 	</tr>
 	</table> 
   </div>
-  <div class="grid-item">c</div>
+  <div class="grid-item"></div>
 </div>
 
 <span width: 50%>

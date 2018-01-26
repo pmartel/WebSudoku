@@ -42,6 +42,39 @@ function buildGUI(ta) {
 	return $table;
 }
 
+// n is the square root of the size of the sudoku
+function newBoard( n = 3 ) {
+	var n2 = n * n;
+	var n4 = n2 * n2;
+	
+	var b = document.getElementById("board");
+	var s = "";
+	var bgColor = 'white';
+	var i, i1,j,j1;
+	
+	for ( i = 0; i < n2; i++ ) {
+		i1 = Math.floor(i/n);
+		s += "<tr>";
+		for ( j = 0; j < n2; j++) {
+			j1 = Math.floor(j/n);
+			if( ( i1+j1)%2 == 0) {
+				bgColor = 'style="background-color:white;"';
+			}
+			else {
+				bgColor = 'style="background-color:LightGray;"';
+			}
+			s += "<td>";	
+			s += "<input type='text'"+bgColor +" 	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ></input>"
+			s += "</td>";			
+		}
+		s += "</tr>";
+	}
+	b.innerHTML = s;
+}
+
 function thisSelect(t){
 	t.select(1);  //selects the text, but it seems to set on exit
+}
+function thisChange(t){
+	var j = t.value;  
 }
