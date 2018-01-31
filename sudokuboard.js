@@ -1,3 +1,5 @@
+newBoard();
+
 /**
  * Build the game GUI
  * @returns {jQuery} Table containing 9x9 input matrix
@@ -53,9 +55,10 @@ function newBoard( n = 3 ) {
 	var i, i1,j,j1;
 	
 	for ( i = 0; i < n2; i++ ) {
-		i1 = Math.floor(i/n);
+		i1 = Math.floor(i/n); 
 		s += "<tr>";
 		for ( j = 0; j < n2; j++) {
+			// color the blocks
 			j1 = Math.floor(j/n);
 			if( ( i1+j1)%2 == 0) {
 				bgColor = 'style="background-color:white;"';
