@@ -75,6 +75,16 @@ function newBoard( n = 3 ) {
 	b.innerHTML = s;
 }
 
+function saveBoard() {
+	var b = document.getElementById("board");
+	var	f = document.getElementById("fileBlock");
+	var r,c;
+	
+//	for ( r in b.firstChild ) {
+	for ( r in b.children ) {
+		var k = null;
+	}
+}
 function thisSelect(t){
 	t.select(1);  //selects the text, but it seems to set on exit
 }

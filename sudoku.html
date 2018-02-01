@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <!-- <body onload="newBoard();"> -->
-<body>
+<body onload="newBoard();">
 <script src="./sudokuboard.js"></script>
 <script>
 //var fs = require('fs');
@@ -23,12 +23,12 @@ table {
 }
 table, tr, th, td {
     text-align: center;
-	border: 1px solid black;
+	border: none;
 	font-size: 20pt;
 }
 input {
     text-align: center;
-	border: none;
+		border: 1px solid black;
 	font-size: 20pt;
 }	
 .grid-container {
@@ -45,7 +45,9 @@ input {
   <div class="grid-item" >
   <p><button  onclick="newBoard()";>New</button></p>
   <p><button >Load</button></p>
-  <p><button >Save</button></p>  
+  <p><button onclick="saveBoard()"; >Save</button></p>  
+  <p>&nbsp;</p>
+  <p><input id="fileBlock" type='text' border></input></p>
   </div>
   <div class="grid-item">
 	<table id="board">
