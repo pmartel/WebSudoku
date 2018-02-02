@@ -85,7 +85,7 @@ function newBoard( n = 3 ) {
 	
 	var b = document.getElementById("board");
 	var s = "";
-	var bgColor;
+	var bg;
 	var i, i1,j,j1;
 	
 	for ( i = 0; i < n2; i++ ) {
@@ -94,14 +94,14 @@ function newBoard( n = 3 ) {
 		for ( j = 0; j < n2; j++) {
 			// color the blocks
 			j1 = Math.floor(j/n);
-			if( ( i1+j1)%2 == 0) {
-				bgColor = 'style="background-color:white;"';
+			if( ( i1+j1)%2 == 1) {
+				bg = "class= 'odd-block'";
 			}
 			else {
-				bgColor = 'style="background-color:LightGray;"';
+				bg= "";
 			}
 			s += "<td>";	
-			s += "<input type='text' "+bgColor +"	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ";
+			s += "<input type='text' "+bg +"	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ";
 			s +=  (" id= 'c"+i)+j+"'";
 			s += "></input></td>";			
 		}
@@ -127,7 +127,7 @@ function saveBoard() {
 		for ( c = 0; c<rLen; c++) { // use rLen for now
 			cell = document.getElementById(('c'+r)+c);
 			v = cell.value;
-			if ( v == '' ){
+			if ( v == ''  || v == ' '){
 				s += '.';
 			} else {
 				s += v;
