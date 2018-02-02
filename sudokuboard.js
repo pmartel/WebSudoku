@@ -44,6 +44,7 @@ function buildGUI(ta) {
 	return $table;
 }
 
+
 // n is the square root of the size of the sudoku
 function newBoard( n = 3 ) {
 	var n2 = n * n;
@@ -51,7 +52,7 @@ function newBoard( n = 3 ) {
 	
 	var b = document.getElementById("board");
 	var s = "";
-	var bgColor = 'white';
+	var bgColor;
 	var i, i1,j,j1;
 	
 	for ( i = 0; i < n2; i++ ) {
@@ -67,24 +68,43 @@ function newBoard( n = 3 ) {
 				bgColor = 'style="background-color:LightGray;"';
 			}
 			s += "<td>";	
-			s += "<input type='text'"+bgColor +" 	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ></input>"
-			s += "</td>";			
+			s += "<input type='text' "+bgColor +"	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ";
+			s +=  (" id= 'c"+i)+j+"'";
+			s += "></input></td>";			
 		}
 		s += "</tr>";
 	}
 	b.innerHTML = s;
 }
 
+// Copy the data from the board to the File block
+// this data may then be copied to a text file. 
 function saveBoard() {
 	var b = document.getElementById("board");
 	var	f = document.getElementById("fileBlock");
-	var r,c;
+	var r, c, cell, s, v;
 	
-//	for ( r in b.firstChild ) {
-	for ( r in b.children ) {
-		var k = null;
+// in the debugger b.firstChild seems to expose the table
+// but it's not clear how to exploit it in code
+	//	for ( r in b.firstChild ) {
+	var rLen = b.firstChild.children.length;
+	
+	s ="";
+	for ( r = 0; r<rLen; r++) {
+		for ( c = 0; c<rLen; c++) { // use rLen for now
+			cell = document.getElementById(('c'+r)+c);
+			v = cell.value;
+			if ( v == '' ){
+				s += '.';
+			} else {
+				s += v;
+			}
+		}
+		s += '\n';
 	}
+	f.value = s;
 }
+
 function thisSelect(t){
 	t.select(1);  //selects the text, but it seems to set on exit
 }

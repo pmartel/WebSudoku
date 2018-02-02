@@ -37,7 +37,13 @@ input {
   grid-template-columns: 25% 50% 25%;
   padding: 10px;
 }
+textarea {
+	font-size: 12pt;
+	border: 1px solid black;
+}
+
 </style>
+
 <h2 >Sudoku</h2>
 <!-- Angular JS might be useful as well as a text select on focus -->
 
@@ -46,8 +52,12 @@ input {
   <p><button  onclick="newBoard()";>New</button></p>
   <p><button >Load</button></p>
   <p><button onclick="saveBoard()"; >Save</button></p>  
-  <p>&nbsp;</p>
-  <p><input id="fileBlock" type='text' border></input></p>
+  <p width:75%>
+  <br/>
+  File block.<br />
+  Copy and paste Sudoku data to this block
+  </p>
+  <p><textarea id="fileBlock" rows=17 cols=17 border></textarea></p>
   </div>
   <div class="grid-item">
 	<table id="board">
