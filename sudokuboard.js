@@ -44,6 +44,39 @@ function buildGUI(ta) {
 	return $table;
 }
 
+function loadBoard() {
+	var	f = document.getElementById("fileBlock");
+	var s = f.value;
+	var row = 0, col = 0, i, c;
+	var idStr;
+	
+	for( i = 0; i < s.length; i++ ) {
+		c = s[i];
+		switch ( c ) {
+			case '\n':
+				row++;
+				col = 0;
+				continue;
+			case '.':
+				c = '';
+				// FALL=THROUGH
+			default:
+				idStr = ('c'+row)+col;
+				var bl = document.getElementById(idStr);
+				bl.value = c;
+				// loaded numbers can not be changed in game
+				if ( c.length > 0 ) { 
+					bl.style = 'color:blue;';
+					bl.readOnly = true;
+				} else {
+					bl.style = 'color:black;';
+					bl.readOnly = false;
+				}
+				col++;
+		}
+	}
+}
+
 
 // n is the square root of the size of the sudoku
 function newBoard( n = 3 ) {
