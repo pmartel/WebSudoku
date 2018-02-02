@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!--
+ Copyright  2018 Philip O. Martel 
+ released under the MIT License
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ -->
 <html>
 <head><title>Sudoku Solver</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -51,32 +60,34 @@ textarea {
 <!-- Angular JS might be useful as well as a text select on focus -->
 
 <div class="grid-container">
-  <div class="grid-item" >
-  <p><button  onclick="newBoard()";>New</button></p>
-  <p><button onclick="loadBoard()";>Load</button></p>
-  <p><button onclick="saveBoard()"; >Save</button></p>  
-  <p width:75%>
-  <br/>
-  File block.<br />
-  Copy and paste Sudoku data to this block
-  </p>
-  <p><textarea id="fileBlock" rows=17 cols=17 border></textarea></p>
-  </div>
-  <div class="grid-item">
-	<table id="board">
-	<tr>
-	<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 
-		onkeypress = "thisSelect(this)"
-		></input></td><td>2</td><td>3</td>
-		<!-- NG onchange="thisSelect(this)" -->
-	</tr><tr>
-	<td>4</td><td>5</td><td>6</td>
-	</tr><tr>
-	<td>6</td><td>8</td><td>9</td>
-	</tr>
-	</table> 
-  </div>
-  <div class="grid-item"></div>
+		<div class="grid-item" >
+		  <p><button  onclick="newBoard()";>New</button></p>
+		  <p><button onclick="loadBoard()";>Load</button></p>
+		  <p><button onclick="saveBoard()"; >Save</button></p>  
+		  <p width:75%>
+		  <br/>
+		  File block.<br />
+		  Copy and paste Sudoku data to this block
+		  </p>
+		  <p><textarea id="fileBlock" rows=17 cols=17 border></textarea></p>
+		</div>
+		<div class="grid-item">
+		<table id="board">
+			<tr>
+				<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 
+					onkeypress = "thisSelect(this)"
+					></input></td><td>2</td><td>3</td>
+					<!-- NG onchange="thisSelect(this)" -->
+				</tr><tr>
+			<td>4</td><td>5</td><td>6</td>
+			</tr><tr>
+			<td>6</td><td>8</td><td>9</td>
+			</tr>
+		</table> 
+		</div>
+		<div class="grid-item">
+			<p><button onclick="about()";>About</button></p>
+		</div>
 </div>
 
 <span width: 50%>

@@ -1,47 +1,20 @@
-newBoard();
-
 /**
- * Build the game GUI
- * @returns {jQuery} Table containing 9x9 input matrix
+ * 
+ *
  */
-function buildGUI(ta) {
-	var $td, $tr,
-		$table = $( '<table>' )
-			.addClass( 'sudoku-container' );
- 
-	// Go over rows
-	for ( var i = 0; i < 9; i++ ) {
-		$tr = $( '<tr>' );
-		this.$cellMatrix[i] = {};
-		// Go over columns
-		for ( var j = 0; j < 9; j++ ) {
-			// Build the input
-			this.$cellMatrix[i][j] = $( '<input>' )
-				.attr( 'maxlength', 1 )
-				// Keep row/col data
-				.data( 'row', i )
-				.data( 'col', j )
-				// Listen to keyup event
-				.on( 'keyup', $.proxy( this.onKeyUp, this ) );
- 
-			$td = $( '<td>' ).append( this.$cellMatrix[i][j] );
-			// Calculate section ID
-			sectIDi = Math.floor( i / 3 );
-			sectIDj = Math.floor( j / 3 );
-			// Set the design for different sections
-			if ( ( sectIDi + sectIDj ) % 2 === 0 ) {
-				$td.addClass( 'sudoku-section-one' );
-			} else {
-				$td.addClass( 'sudoku-section-two' );
-			}
-			// Build the row
-			$tr.append( $td );
-		}
-		// Append to table
-		$table.append( $tr );
-	}
-	// Return the GUI table
-	return $table;
+
+ var aboutStr = '\n\
+ Copyright  2018 Philip O. Martel \n\
+Released under the MIT License:\n\
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software \
+without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit \ persons to whom the Software is furnished to do so, subject to the following conditions:\n\
+\n\
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\
+\n\
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY \ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."'
+
+function about() {
+	alert(aboutStr);
 }
 
 function loadBoard() {
