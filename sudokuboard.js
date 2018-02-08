@@ -111,8 +111,20 @@ function saveBoard() {
 	f.value = s;
 }
 
-function thisSelect(t){
-	t.select(1);  //selects the text, but it seems to set on exit
+function thisSet(t){
+	t.select(1);  //selects the text, but it seems to set the new value on exit
+	var ch = document.getElementById("checkEntry");
+	var i = 1;
+	// event.key has the new key entry
+	// t.value has the current value, but I can't seem to write to either.
+	if( document.getElementById("checkEntry").checked ) {
+		if ( checkEntry( t, event.key ) ){
+			t.style = 'color:black;';
+		} else  {
+			t.style = 'color:red;';
+		}
+	}
+		
 }
 function thisChange(t){
 	var j = t.value;  
