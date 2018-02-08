@@ -74,7 +74,7 @@ function newBoard( n = 3 ) {
 				bg= "";
 			}
 			s += "<td>";	
-			s += "<input type='text' "+bg +"	size= '1' maxlength='1' onkeypress = 'thisSelect(this)' ";
+			s += "<input type='text' "+bg +"	size= '1' maxlength='1' onkeypress = 'thisSet(this)' ";
 			s +=  (" id= 'c"+i)+j+"'";
 			s += "></input></td>";			
 		}
@@ -123,7 +123,10 @@ function thisSet(t){
 		} else  {
 			t.style = 'color:red;';
 		}
+	} else {
+		t.style = 'color:black;';
 	}
+
 		
 }
 function thisChange(t){
