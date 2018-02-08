@@ -10,14 +10,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  -->
 <html>
 <head><title>Sudoku Solver</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<!-- <body onload="newBoard();"> -->
 <body onload="newBoard();">
-<script src="./sudokuboard.js"></script>
-<script>
-//var fs = require('fs');
-</script>
+
+<script  src="./sudokuboard.js"></script>
+<script   src="./solver.js"></script>
+
 <style>
 
 h2 {
@@ -57,7 +56,6 @@ textarea {
 </style>
 
 <h2 >Sudoku</h2>
-<!-- Angular JS might be useful as well as a text select on focus -->
 
 <div class="grid-container">
 		<div class="grid-item" >
@@ -75,7 +73,7 @@ textarea {
 		<table id="board">
 			<tr>
 				<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 
-					onkeypress = "thisSelect(this)"
+					onkeypress = "thisSet(this)"
 					></input></td><td>2</td><td>3</td>
 					<!-- NG onchange="thisSelect(this)" -->
 				</tr><tr>
@@ -87,6 +85,10 @@ textarea {
 		</div>
 		<div class="grid-item">
 			<p><button onclick="about()";>About</button></p>
+			<p><input type="checkbox" id="checkEntry"> Check Entry  </input> 
+				<button class="fa fa-question-circle-o" onclick="aboutCheckEntry()"></button>
+			</p>
+			<p><button onclick="solve();">Solve</button></p>
 		</div>
 </div>
 
