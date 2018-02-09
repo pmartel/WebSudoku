@@ -10,15 +10,42 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 /*
-It's probably possible to use the table (id="board") directly,  For now set up an auxilliary board.
+It's probably possible to use the table (id="board") directly,  For now set up a global auxilliary board.
 */
+var auxBoard;
+
+// I tried setting the auxBoard elements to this, but I need separate instances
+//var boardObj = { value: undefined, readOnly: false, possible : [] };
 
 function aboutCheckEntry() {
-	alert("Checking this box checks if there are any conflicts, not whether the entry is correct");
+	alert("Checking this box checks if there are any conflicts with the digit entered, not whether the entry is correct");
 }
 
 function checkEntry(t, key){
 	return false;
+}
+
+function newAuxBoard( n = 3 ) {
+	var n2 = n ** 2;
+	var r, c;
+	var temp=new Array(n2);
+	
+	for ( r = 0; r < n2; r++) {
+		temp[r] = new Array(n2);
+		for ( c = 0; c < n2; c++ ) {
+			temp[r][c] = { value: undefined, readOnly: false, possible : [] };
+		}
+	}
+	auxBoard = temp;
+}
+
+function setAuxBoard( r, c, v, ro = false ) {
+	if ( v == '' | v == " " ) {
+		v = undefined;
+	}
+	auxBoard[r][c].value = v;
+	auxBoard[r][c].readOnly = ro;
+	
 }
 
 function solve(){

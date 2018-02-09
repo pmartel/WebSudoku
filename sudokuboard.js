@@ -11,7 +11,7 @@ without restriction, including without limitation the rights to use, copy, modif
 \n\
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\
 \n\
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY \ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."'
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY \ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."';
 
 function about() {
 	alert(aboutStr);
@@ -41,10 +41,12 @@ function loadBoard() {
 				if ( c.length > 0 ) { 
 					bl.style = 'color:blue;';
 					bl.readOnly = true;
+					setAuxBoard(row,col, c, true);
 				} else {
 					bl.style = 'color:black;';
 					bl.readOnly = false;
-				}
+					setAuxBoard(row,col, c, false);
+			}
 				col++;
 		}
 	}
@@ -81,6 +83,7 @@ function newBoard( n = 3 ) {
 		s += "</tr>";
 	}
 	b.innerHTML = s;
+	newAuxBoard(n);
 }
 
 // Copy the data from the board to the File block
@@ -114,7 +117,7 @@ function saveBoard() {
 function thisSet(t){
 	t.select(1);  //selects the text, but it seems to set the new value on exit
 	var ch = document.getElementById("checkEntry");
-	var i = 1;
+
 	// event.key has the new key entry
 	// t.value has the current value, but I can't seem to write to either.
 	if( document.getElementById("checkEntry").checked ) {
@@ -126,8 +129,10 @@ function thisSet(t){
 	} else {
 		t.style = 'color:black;';
 	}
-
-		
+	var r, c;
+	r = t.id[1]; // extract row and colmn from id
+	c=t.id[2];
+	setAuxBoard( r, c, event.key);
 }
 function thisChange(t){
 	var j = t.value;  
