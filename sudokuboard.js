@@ -4,6 +4,7 @@
  */
 
  var aboutStr = '\n\
+ HTML and Javascript Sudoku program\n\n\
  Copyright  2018 Philip O. Martel \n\
 Released under the MIT License:\n\
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software \
@@ -12,6 +13,8 @@ without restriction, including without limitation the rights to use, copy, modif
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\
 \n\
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY \ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."';
+
+var boardSize;
 
 function about() {
 	alert(aboutStr);
@@ -63,6 +66,7 @@ function newBoard( n = 3 ) {
 	var bg;
 	var i, i1,j,j1;
 	
+	boardSize = n2;
 	for ( i = 0; i < n2; i++ ) {
 		i1 = Math.floor(i/n); 
 		s += "<tr>";
@@ -117,11 +121,21 @@ function saveBoard() {
 function thisSet(t){
 	t.select(1);  //selects the text, but it seems to set the new value on exit
 	var ch = document.getElementById("checkEntry");
-
 	// event.key has the new key entry
+	var key = event.key;
+
+	// check that the key pressed is ok
+	// note, we can vary legit with boardSize.  If we go to a 16x16 board,
+	//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
+	var legit = ['Enter',' ','1','2','3','4','5','6','7','8','9'];
+	if ( !(key in legit) ){
+		event.returnValue = false;
+		return;
+	}
+	
 	// t.value has the current value, but I can't seem to write to either.
 	if( document.getElementById("checkEntry").checked ) {
-		if ( checkEntry( t, event.key ) ){
+		if ( checkEntry( t, key ) ){
 			t.style = 'color:black;';
 		} else  {
 			t.style = 'color:red;';
@@ -132,7 +146,7 @@ function thisSet(t){
 	var r, c;
 	r = t.id[1]; // extract row and colmn from id
 	c=t.id[2];
-	setAuxBoard( r, c, event.key);
+	setAuxBoard( r, c, key);
 }
 function thisChange(t){
 	var j = t.value;  
