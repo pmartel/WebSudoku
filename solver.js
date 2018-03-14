@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 /*
-It's probably possible to use the table (id="board") directly,  For now set up a global auxilliary board.
+It's probably possible to use the table (id="board") directly,  For now set up a global auxiliary board.
 */
 var auxBoard;
 
@@ -21,7 +21,29 @@ function aboutCheckEntry() {
 	alert("Checking this box checks if there are any conflicts with the digit entered, not whether the entry is correct");
 }
 
+function checkBox(t, key){
+	return true;
+}
+
+function checkCol(t, key){
+	return true;
+}
+
 function checkEntry(t, key){
+	if (checkRow(t,key)) {
+		if (checkCol(t,key)) {
+			if (checkBox(t,key)){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function checkRow(t, key){
+	var i;
+	for (i=0; i < boardSize;i++){
+	}
 	return false;
 }
 
@@ -40,7 +62,7 @@ function newAuxBoard( n = 3 ) {
 }
 
 function setAuxBoard( r, c, v, ro = false ) {
-	if ( v == '' | v == " " ) {
+	if ( v == '' || v == " " ) {
 		v = undefined;
 	}
 	auxBoard[r][c].value = v;
