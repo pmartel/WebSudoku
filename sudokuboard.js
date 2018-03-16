@@ -14,7 +14,7 @@ The above copyright notice and this permission notice shall be included in all c
 \n\
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF \ MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY \ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE \ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."';
 
-var boardSize;
+var boardSize, blockSize;
 
 function about() {
 	alert(aboutStr);
@@ -66,7 +66,11 @@ function newBoard( n = 3 ) {
 	var bg;
 	var i, i1,j,j1;
 	
+	blockSize = n;
 	boardSize = n2;
+	//globals.  Possibly we can store these in the board structure.
+	b.blockSize = n;
+	
 	for ( i = 0; i < n2; i++ ) {
 		i1 = Math.floor(i/n); 
 		s += "<tr>";
@@ -127,10 +131,18 @@ function thisSet(t){
 	// check that the key pressed is ok
 	// note, we can vary legit with boardSize.  If we go to a 16x16 board,
 	//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
-	var legit = ['Enter',' ','1','2','3','4','5','6','7','8','9'];
-	if ( !(key in legit) ){
-		event.returnValue = false;
-		return;
+	// the in operator doesn't seem to apply to enter or space
+	var legit = ['1','2','3','4','5','6','7','8','9'];
+	
+	// if (key == "Enter") { // I can't modify the key, so punt and only use space to erase a cell
+		// event.key = " ";
+		// key = " ";
+	// }
+	if (key != " ") {
+		if ( !(key in legit) ){
+			event.returnValue = false; // this prevents the character from appearing 
+			return;
+		}
 	}
 	
 	// t.value has the current value, but I can't seem to write to either.
@@ -143,11 +155,17 @@ function thisSet(t){
 	} else {
 		t.style = 'color:black;';
 	}
-	var r, c;
-	r = t.id[1]; // extract row and colmn from id
-	c=t.id[2];
-	setAuxBoard( r, c, key);
+	var rc = thisRC(t);
+	setAuxBoard( rc.r, rc.c, key);
 }
 function thisChange(t){
 	var j = t.value;  
 }
+
+function thisRC(t){
+	var rc={}; // row, column structure
+	rc.r = t.id[1]; // extract row and column from id
+	rc.c = t.id[2];
+	return rc;
+}
+	
