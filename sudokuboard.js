@@ -44,12 +44,10 @@ function loadBoard() {
 				if ( c.length > 0 ) { 
 					bl.style = 'color:blue;';
 					bl.readOnly = true;
-					setAuxBoard(row,col, c, true);
 				} else {
 					bl.style = 'color:black;';
 					bl.readOnly = false;
-					setAuxBoard(row,col, c, false);
-			}
+				}
 				col++;
 		}
 	}
@@ -91,7 +89,6 @@ function newBoard( n = 3 ) {
 		s += "</tr>";
 	}
 	b.innerHTML = s;
-	newAuxBoard(n);
 }
 
 // Copy the data from the board to the File block
