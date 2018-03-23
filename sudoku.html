@@ -45,6 +45,23 @@ input {
   grid-template-columns: 25% 50% 25%;
   padding: 10px;
 }
+.grid-item {
+  text-align: center;
+  padding: 10px;
+}
+.item1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+.item2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+.item3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
 textarea {
 	font-size: 12pt;
 	border: 1px solid black;
@@ -58,7 +75,7 @@ textarea {
 <h2 >Sudoku</h2>
 
 <div class="grid-container">
-		<div class="grid-item" >
+		<div class="grid-item item1">
 		  <p><button  onclick="newBoard()";>New</button></p>
 		  <p><button onclick="loadBoard()";>Load</button></p>
 		  <p><button onclick="saveBoard()"; >Save</button></p>  
@@ -69,7 +86,7 @@ textarea {
 		  </p>
 		  <p><textarea id="fileBlock" rows=17 cols=17 border></textarea></p>
 		</div>
-		<div class="grid-item">
+		<div class="grid-item item2">
 		<table id="board">
 			<tr>
 				<td><input id='b1' type="text" 	size= '1' maxlength="1" border = 1 
@@ -82,7 +99,7 @@ textarea {
 			</tr>
 		</table> 
 		</div>
-		<div class="grid-item">
+		<div class="grid-item item3">
 			<p><button onclick="about()";>About</button></p>
 			<p><input type="checkbox" id="checkEntry"> Check Entry&nbsp;</input> 
 				<button onclick="aboutCheckEntry()">?</button>
