@@ -112,31 +112,12 @@ function checkRow(t, key){
 	return true;
 }
 
-function newAuxBoard( n = 3 ) {
-	var n2 = n ** 2;
-	var r, c;
-	var temp=new Array(n2);
-	
-	for ( r = 0; r < n2; r++) {
-		temp[r] = new Array(n2);
-		for ( c = 0; c < n2; c++ ) {
-			temp[r][c] = { value: undefined, readOnly: false, possible : [] };
-		}
-	}
-	auxBoard = temp;
-}
-
-function setAuxBoard( r, c, v, ro = false ) {
-	if ( v == '' || v == " " ) {
-		v = undefined;
-	}
-	auxBoard[r][c].value = v;
-	auxBoard[r][c].readOnly = ro;
-	
-}
-
 function solve(){
 	// read in board
+	if (!boardOk(document.getElementById('board'))){
+		alert( "This board is in a bad state and can't be solved.");
+		return;
+	}
 	// update possible lists
 	// fill in singletons
 	
