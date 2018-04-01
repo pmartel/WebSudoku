@@ -51,6 +51,9 @@ function loadBoard() {
 				col++;
 		}
 	}
+	if (!boardOk(document.getElementById('board')) ) {
+		alert("board being loaded is bad");
+	}
 }
 
 

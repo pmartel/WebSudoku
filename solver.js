@@ -21,6 +21,34 @@ function aboutCheckEntry() {
 	alert("Checking this box checks if there are any conflicts with the digit entered, not whether the entry is correct");
 }
 
+function boardOk( b ) {
+	var r, c, cell, v
+	var len = b.firstChild.children.length;
+
+	for ( r = 0; r < len; r++ ) {
+		for ( c = 0; c < len; c++ )  {
+			cell = document.getElementById( ('c'+r)+c);
+			v = cell.value;
+			if (!( v == ''  || v == ' ')){ // not a blank
+				if ( !checkBox(cell, v) ) {
+					cell.style = 'color:red;';
+					return false;
+				}
+				if ( !checkCol(cell, v) ) {
+					cell.style = 'color:red;';
+					return false;
+				}
+				if ( !checkRow(cell, v) ) {
+					cell.style = 'color:red;';
+					return false;
+				}
+			}
+
+		}
+	}
+	return true;
+}
+
 function checkBox(t, key){
 	var rc, rcMin={}, r, c;
 	var cell;
@@ -108,5 +136,9 @@ function setAuxBoard( r, c, v, ro = false ) {
 }
 
 function solve(){
+	// read in board
+	// update possible lists
+	// fill in singletons
+	
 }
 
