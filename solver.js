@@ -112,13 +112,34 @@ function checkRow(t, key){
 	return true;
 }
 
+function generatePossible( b ) {
+	var r, c, cell, v
+	var len = b.firstChild.children.length;
+
+	for ( r = 0; r < len; r++ ) {
+		for ( c = 0; c < len; c++ ) {
+			cell = document.getElementById( ('c'+r)+c);
+			v = cell.value;
+			if (v.length > 0) { // cell has value so it's the only one
+				cell.possible = [];
+			} else {
+				cell.possible = possibleArray; 
+			}
+		}
+	}
+}
+
 function solve(){
-	// read in board
-	if (!boardOk(document.getElementById('board'))){
-		alert( "This board is in a bad state and can't be solved.");
+	var r, c, cell;
+	// check the board
+	var board = document.getElementById('board');
+	if (!boardOk(board)){
+		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
 		return;
 	}
-	// update possible lists
+	// generate possible numbers for each cell
+	generatePossible(board);
+	
 	// fill in singletons
 	
 }
