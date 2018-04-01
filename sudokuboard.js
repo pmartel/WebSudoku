@@ -20,10 +20,13 @@ function about() {
 	alert(aboutStr);
 }
 
+// note, we can vary lthis with boardSize.  If we go to a 16x16 board,
+//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
+var possibleArray = ['1','2','3','4','5','6','7','8','9'];
+
 function isLegit(c) { // ckeck if character c is legitimare
-	// note, we can vary legit with boardSize.  If we go to a 16x16 board,
-	//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
-	var legit = [ 'Enter', ' ','1','2','3','4','5','6','7','8','9'];
+	// Enter or space should clear a value they and the possible values array are legitimate
+	var legit = [ 'Enter', ' '].concat( possibleArray);
 	var x;
 
 	for ( x in legit ) {
