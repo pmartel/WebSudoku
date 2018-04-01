@@ -20,6 +20,20 @@ function about() {
 	alert(aboutStr);
 }
 
+function isLegit(c) { // ckeck if character c is legitimare
+	// note, we can vary legit with boardSize.  If we go to a 16x16 board,
+	//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
+	var legit = [ 'Enter', ' ','1','2','3','4','5','6','7','8','9'];
+	var x;
+
+	for ( x in legit ) {
+		if( legit[x] == c ) {
+			return true;
+		}
+	}
+	return false;
+}
+
 function loadBoard() {
 	var	f = document.getElementById("fileBlock");
 	var s = f.value;
@@ -129,20 +143,9 @@ function thisSet(t){
 	var key = event.key;
 
 	// check that the key pressed is ok
-	// note, we can vary legit with boardSize.  If we go to a 16x16 board,
-	//  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
-	// the in operator doesn't seem to apply to enter or space
-	var legit = ['1','2','3','4','5','6','7','8','9'];
-	
-	// if (key == "Enter") { // I can't modify the key, so punt and only use space to erase a cell
-		// event.key = " ";
-		// key = " ";
-	// }
-	if (key != " ") {
-		if ( !(key in legit) ){
-			event.returnValue = false; // this prevents the character from appearing 
-			return;
-		}
+	if (!isLegit(key)) {
+		event.returnValue = false; // this prevents the character from appearing 
+		return;
 	}
 	
 	// t.value has the current value, but I can't seem to write to either.
@@ -156,9 +159,10 @@ function thisSet(t){
 		t.style = 'color:black;';
 	}
 	var rc = thisRC(t);
-	setAuxBoard( rc.r, rc.c, key);
+//	setAuxBoard( rc.r, rc.c, key);
 }
-function thisChange(t){
+
+function thisChange(t) {
 	var j = t.value;  
 }
 
