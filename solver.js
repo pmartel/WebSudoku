@@ -112,19 +112,54 @@ function checkRow(t, key){
 	return true;
 }
 
-function generatePossible( b ) {
-	var r, c, cell, v
-	var len = b.firstChild.children.length;
+// clear used or impossible values from tall cell.possible lists
+function clearBoardUsed(b) {
+	var r, c, cell;
 
-	for ( r = 0; r < len; r++ ) {
-		for ( c = 0; c < len; c++ ) {
+	for ( r = 0; r < boardSize; r++ ) {
+		for ( c = 0; c < boardSize; c++ ) {
 			cell = document.getElementById( ('c'+r)+c);
-			v = cell.value;
-			if (v.length > 0) { // cell has value so it's the only one
-				cell.possible = [];
-			} else {
-				cell.possible = possibleArray; 
+			if ( cell.value.length > 0 ) {
+				clearCellUsed( cell, r, c );
 			}
+		}
+	}	
+}
+
+// the given cell has a (possibly new) value remove that value
+// from the possible list of cells that are  blocked from having it
+// cell has r and c implicitly, having the explicit values is a speedup
+function clearCellUsed( cell, row, col ) {
+	var r, c; // row and column indices
+	var rBox = Math.floor(row/blockSize); 
+	var cBox = Math.floor(col/blockSize); 
+
+	var v = cell.value;
+	var tempCell, i;
+	
+	// a cell that is used has no more possible values
+	cell.possible = [];
+	//clear the row
+	for ( c = 0; c < boardSize; c++) {
+		if ( c != col ) {
+			tempCell = document.getElementById( ('c' + row) + c );
+			i = tempCell.possible.indexOf(v);
+			if ( i >= 0 ) {
+				tempCell.possible.splice(i,1); // remove v
+			}
+		}
+	}
+}
+
+// add/reset the property .possible on all cells  
+function generatePossibleCells() {
+	var r, c, cell;
+	//var len = b.firstChild.children.length; use boardSize global
+
+	for ( r = 0; r < boardSize; r++ ) {
+		for ( c = 0; c < boardSize; c++ ) {
+			// Note: must set this directly  cell =  document.getElementById( ('c'+r)+c) makes a copy
+			 document.getElementById( ('c'+r)+c).possible = possibleArray; 
 		}
 	}
 }
@@ -138,8 +173,8 @@ function solve(){
 		return;
 	}
 	// generate possible numbers for each cell
-	generatePossible(board);
-	
+	generatePossibleCells();
+	clearBoardUsed();
 	// fill in singletons
 	
 }
