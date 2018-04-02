@@ -165,6 +165,19 @@ function generatePossibleCells() {
 	}
 }
 
+var altBoard = [];
+
+function altPossCells() {
+	var r,c;
+	
+	for ( r = boardSize-1; r >=0; r-- ) {
+		altBoard[r] = [];
+		for ( c = boardSize-1; c >=0; c-- ) {
+			altBoard[r][c] = Array(possibleArray);
+		}
+	}
+}
+
 function solve(){
 	var r, c, cell;
 	// check the board
@@ -173,6 +186,7 @@ function solve(){
 		return;
 	}
 	// generate possible numbers for each cell
+	altPossCells();
 	generatePossibleCells();
 	clearBoardUsed();
 	// fill in singletons
