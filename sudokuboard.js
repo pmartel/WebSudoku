@@ -84,10 +84,11 @@ function newBoard( n = 3 ) {
 	var bg;
 	var i, i1,j,j1;
 	
+	//globals.  Possibly we can store these in the board structure.
 	blockSize = n;
 	boardSize = n2;
-	//globals.  Possibly we can store these in the board structure.
-	b.blockSize = n;
+
+	//b.blockSize = n;
 	
 	for ( i = 0; i < n2; i++ ) {
 		i1 = Math.floor(i/n); 
