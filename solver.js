@@ -160,7 +160,7 @@ function generatePossibleCells() {
 	for ( r = 0; r < boardSize; r++ ) {
 		for ( c = 0; c < boardSize; c++ ) {
 			// Note: must set this directly...  cell =  document.getElementById( ('c'+r)+c) makes a copy
-			 document.getElementById( ('c'+r)+c).possible = possibleArray; 
+			 document.getElementById( ('c'+r)+c).possible =Array.from( possibleArray); 
 		}
 	}
 }
