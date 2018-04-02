@@ -21,12 +21,11 @@ function aboutCheckEntry() {
 	alert("Checking this box checks if there are any conflicts with the digit entered, not whether the entry is correct");
 }
 
-function boardOk( b ) {
+function boardOk() {
 	var r, c, cell, v
-	var len = b.firstChild.children.length;
 
-	for ( r = 0; r < len; r++ ) {
-		for ( c = 0; c < len; c++ )  {
+	for ( r = 0; r < boardSize; r++ ) {
+		for ( c = 0; c < boardSize; c++ )  {
 			cell = document.getElementById( ('c'+r)+c);
 			v = cell.value;
 			if (!( v == ''  || v == ' ')){ // not a blank
@@ -135,17 +134,19 @@ function clearCellUsed( cell, row, col ) {
 	var cBox = Math.floor(col/blockSize); 
 
 	var v = cell.value;
-	var tempCell, i;
+	var tempPossible, i, s;
 	
 	// a cell that is used has no more possible values
 	cell.possible = [];
 	//clear the row
 	for ( c = 0; c < boardSize; c++) {
 		if ( c != col ) {
-			tempCell = document.getElementById( ('c' + row) + c );
-			i = tempCell.possible.indexOf(v);
+			 s =  ('c' + row) + c ;
+			tempPossible = document.getElementById( s ).possible;
+			i = tempPossible.indexOf(v);
 			if ( i >= 0 ) {
-				tempCell.possible.splice(i,1); // remove v
+				tempPossible.splice(i,1); // remove v
+				document.getElementById( s).possible = tempPossible;
 			}
 		}
 	}
@@ -158,7 +159,7 @@ function generatePossibleCells() {
 
 	for ( r = 0; r < boardSize; r++ ) {
 		for ( c = 0; c < boardSize; c++ ) {
-			// Note: must set this directly  cell =  document.getElementById( ('c'+r)+c) makes a copy
+			// Note: must set this directly...  cell =  document.getElementById( ('c'+r)+c) makes a copy
 			 document.getElementById( ('c'+r)+c).possible = possibleArray; 
 		}
 	}
@@ -167,8 +168,7 @@ function generatePossibleCells() {
 function solve(){
 	var r, c, cell;
 	// check the board
-	var board = document.getElementById('board');
-	if (!boardOk(board)){
+	if (!boardOk()){
 		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
 		return;
 	}
