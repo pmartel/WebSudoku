@@ -46,9 +46,9 @@ function boardOk() {
 		}
 	}
 	return true;
-}
+} // boardOk()
 
-function checkBlock(t, key){
+function checkBlock(t, key) {
 	var rc, rcMin={}, r, c;
 	var cell;
 	
@@ -66,9 +66,9 @@ function checkBlock(t, key){
 		}
 	}
 	return true;
-}
+} //checkBlock(t, key)
 
-function checkCol(t, key){
+function checkCol(t, key) {
 	var r;
 	var rc = thisRC(t);
 	var cell;
@@ -82,9 +82,9 @@ function checkCol(t, key){
 		}
 	}
 	return true;
-}
+} // checkCol(t, key) 
 
-function checkEntry(t, key){
+function checkEntry(t, key) {
 	if (checkRow(t,key)) {
 		if (checkCol(t,key)) {
 			if (checkBlock(t,key)){
@@ -93,9 +93,9 @@ function checkEntry(t, key){
 		}
 	}
 	return false;
-}
+} //checkEntry(t, key)
 
-function checkRow(t, key){
+function checkRow(t, key) {
 	var c;
 	var rc = thisRC(t);
 	var cell;
@@ -109,7 +109,7 @@ function checkRow(t, key){
 		}
 	}
 	return true;
-}
+} // checkRow(t, key)
 
 // clear used or i values from possibleBoard
 // returns true if board is full
@@ -128,7 +128,7 @@ function clearBoardUsed(b) {
 		}
 	}	
 	return retVal;
-}
+} //clearBoardUsed(b) 
 
 // the given cell has a (possibly new) value remove that value
 // from the possible list of cells that are  blocked from having it
@@ -174,7 +174,7 @@ function clearCellUsed( row, col, val ) {
 		}
 	}
 		
-}
+} //clearCellUsed( row, col, val )
 
 // add/reset the property .possible on all cells  
 var possibleBoard = [];
@@ -187,49 +187,115 @@ function generatePossibleCells() {
 		for ( c = boardSize-1; c >=0; c-- ) {
 //			possibleBoard[r][c] = Array(possibleArray);
 // the above makes each entry in possible board an array of length 1 containing possibleArray
-// as its only element
+// as its only element.  Below makes each entry a copy of possibleArray
 			t= [];
 			possibleBoard[r][c] = t.concat(possibleArray);
 		}
 	}
-}
+} //generatePossibleCells()
 
+// for each number, is there only one cell in a block with that possible number
 function oneInBlock() {
 	var retVal = false;
+	var r, c, v, n, count, rIdx, cIdx ;
+	var bl, rMin, cMin;
 	
+	for ( n = 0; n < possibleArray.length; n++ ) {
+		v = possibleArray[n];
+		for ( bl= 0; bl < boardSize; bl++ ) {
+			rMin = Math.floor( bl / blockSize) * blockSize;
+			cMin = (bl % blockSize) * blockSize;
+			
+		}
+	}
 	return retVal;
-}
+} //oneInBlock()
 
+// for each number, is there only one cell in a column with that possible number
 function oneInColumn() {
 	var retVal = false;
+	var r, c, v, n, count, rIdx ;
 	
+	for ( n = 0; n < possibleArray.length; n++ ) {
+		v = possibleArray[n];
+		for ( c = 0; c < boardSize; c++) {
+			count=0;
+			for ( r = 0; r < boardSize; r++ ) {
+				if ( possibleBoard[r][c].indexOf( v ) >= 0 ) { // v is a possibility for this cell
+					count++;
+					if ( count > 1 ) {
+						break;
+					}
+					rIdx = r;
+				}
+			}
+			if ( count == 1 )  {
+				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
+				document.getElementById(  ('c'+rIdx)+c).style = 'color:lightgreen;';
+				retVal = true;
+			}
+		}
+	}
 	return retVal;
-}
+} //oneInColumn()
 
+// for each number, is there only one cell in a row with that possible number
 function oneInRow() {
 	var retVal = false;
+	var r, c, v, n, count, cIdx ;
 	
+	for ( n = 0; n < possibleArray.length; n++ ) {
+		v = possibleArray[n];
+		for ( r = 0; r < boardSize; r++) {
+			count=0;
+			for ( c = 0; c < boardSize; c++ ) {
+				if ( possibleBoard[r][c].indexOf( v ) >= 0 ) { // v is a possibility for this cell
+					count++;
+					if ( count > 1 ) {
+						break;
+					}
+					cIdx = c;
+				}
+			}
+			if ( count == 1 )  {
+				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
+				document.getElementById(  ('c'+r)+cIdx).style = 'color:lightgreen;';
+				retVal = true;
+			}
+		}
+	}
 	return retVal;
-}
+} // oneInRow()
 
 // find and fill in any cells with only one possibility
 function singleton() {
 	var retVal = false;
+	var r, c, v;
 	
+	for ( r = 0; r < boardSize; r++) {
+		for ( c = 0; c < boardSize; c++ ) {
+			if ( possibleBoard[r][c].length == 1 ) {
+				v = possibleBoard[r][c];
+				document.getElementById(  ('c'+r)+c).value = v[0];
+				document.getElementById(  ('c'+r)+c).style = 'color:lightgreen;';
+				retVal = true;
+			}
+		}
+	}
+				
 	return retVal;
-}
+} //singleton()
 
-
-function solve(){
+function solve() {
 	var r, c, cell;
 	// check the board
 	if (!boardOk()){
 		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
 		return;
 	}
-	// generate possible numbers for each cell
-	generatePossibleCells();
 	while (true) {
+		// generate possible numbers for each cell
+		generatePossibleCells();
 		if (clearBoardUsed() ) {
 			break; // exit if all filled
 		}
@@ -240,14 +306,15 @@ function solve(){
 		if ( oneInRow() ) {
 			continue;
 		}
-		if (oneInColumn() ){
-			continue();
+		if ( oneInColumn() ){
+			continue;
 		}
-		if oneInBlock() ) {
+		if ( oneInBlock() ) {
 			continue;
 		}
 		//need to guess
+		debugger;
 	}
 	
-}
+} // solve()
 
