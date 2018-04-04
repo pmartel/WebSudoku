@@ -165,15 +165,20 @@ function generatePossibleCells() {
 	}
 }
 
-var altBoard = [];
+// add/reset the property .possible on all cells  
+var possibleBoard = [];
 
-function altPossCells() {
-	var r,c;
+function generatePossibleCells() {
+	var r,c, t;
 	
 	for ( r = boardSize-1; r >=0; r-- ) {
-		altBoard[r] = [];
+		possibleBoard[r] = [];
 		for ( c = boardSize-1; c >=0; c-- ) {
-			altBoard[r][c] = Array(possibleArray);
+//			possibleBoard[r][c] = Array(possibleArray);
+// the above makes each entry in possible board an array of length 1 containing possibleArray
+// as its only element
+			t= [];
+			possibleBoard[r][c] = t.concat(possibleArray);
 		}
 	}
 }
