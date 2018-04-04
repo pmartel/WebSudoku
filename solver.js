@@ -29,7 +29,7 @@ function boardOk() {
 			cell = document.getElementById( ('c'+r)+c);
 			v = cell.value;
 			if (!( v == ''  || v == ' ')){ // not a blank
-				if ( !checkBox(cell, v) ) {
+				if ( !checkBlock(cell, v) ) {
 					cell.style = 'color:red;';
 					return false;
 				}
@@ -48,7 +48,7 @@ function boardOk() {
 	return true;
 }
 
-function checkBox(t, key){
+function checkBlock(t, key){
 	var rc, rcMin={}, r, c;
 	var cell;
 	
@@ -87,7 +87,7 @@ function checkCol(t, key){
 function checkEntry(t, key){
 	if (checkRow(t,key)) {
 		if (checkCol(t,key)) {
-			if (checkBox(t,key)){
+			if (checkBlock(t,key)){
 				return true;
 			}
 		}
@@ -111,58 +111,69 @@ function checkRow(t, key){
 	return true;
 }
 
-// clear used or impossible values from tall cell.possible lists
+// clear used or i values from possibleBoard
+// returns true if board is full
 function clearBoardUsed(b) {
-	var r, c, cell;
-
+	var r, c, val;
+	var retVal = true;
+	
 	for ( r = 0; r < boardSize; r++ ) {
 		for ( c = 0; c < boardSize; c++ ) {
-			cell = document.getElementById( ('c'+r)+c);
-			if ( cell.value.length > 0 ) {
-				clearCellUsed( cell, r, c );
+			val = document.getElementById( ('c'+r)+c).value;
+			if ( val.length > 0 ) {
+				clearCellUsed( r, c, val );
+			} else {
+				retVal = false;
 			}
 		}
 	}	
+	return retVal;
 }
 
 // the given cell has a (possibly new) value remove that value
 // from the possible list of cells that are  blocked from having it
 // cell has r and c implicitly, having the explicit values is a speedup
-function clearCellUsed( cell, row, col ) {
+function clearCellUsed( row, col, val ) {
 	var r, c; // row and column indices
-	var rBox = Math.floor(row/blockSize); 
-	var cBox = Math.floor(col/blockSize); 
+	var rBlock = Math.floor(row/blockSize)*blockSize; 
+	var cBlock = Math.floor(col/blockSize)*blockSize; 
 
-	var v = cell.value;
-	var tempPossible, i, s;
-	
+	var  i;
+
 	// a cell that is used has no more possible values
-	cell.possible = [];
+	possibleBoard[row][col] = [];
 	//clear the row
 	for ( c = 0; c < boardSize; c++) {
 		if ( c != col ) {
-			 s =  ('c' + row) + c ;
-			tempPossible = document.getElementById( s ).possible;
-			i = tempPossible.indexOf(v);
+			i = possibleBoard[row][c].indexOf(val);
 			if ( i >= 0 ) {
-				tempPossible.splice(i,1); // remove v
-				document.getElementById( s).possible = tempPossible;
+				possibleBoard[row][c].splice(i,1); // remove v
 			}
 		}
 	}
-}
-
-// add/reset the property .possible on all cells  
-function generatePossibleCells() {
-	var r, c, cell;
-	//var len = b.firstChild.children.length; use boardSize global
-
-	for ( r = 0; r < boardSize; r++ ) {
-		for ( c = 0; c < boardSize; c++ ) {
-			// Note: must set this directly...  cell =  document.getElementById( ('c'+r)+c) makes a copy
-			 document.getElementById( ('c'+r)+c).possible =Array.from( possibleArray); 
+	//clear the column
+	for ( r = 0; r < boardSize; r++) {
+		if ( r != row ) {
+			i = possibleBoard[r][col].indexOf(val);
+			if ( i >= 0 ) {
+				possibleBoard[r][col].splice(i,1); // remove v
+			}
 		}
 	}
+	// clear the box
+	for(  r = rBlock; r < rBlock + blockSize; r++ ){
+		if( r != row ){
+			for(  c = cBlock; c < cBlock + blockSize; c++ ){
+				if( c != col ){
+					i = possibleBoard[r][c].indexOf(val);
+					if ( i >= 0 ) {
+						possibleBoard[r][c].splice(i,1); // remove v
+					}
+				}
+			}
+		}
+	}
+		
 }
 
 // add/reset the property .possible on all cells  
@@ -183,6 +194,32 @@ function generatePossibleCells() {
 	}
 }
 
+function oneInBlock() {
+	var retVal = false;
+	
+	return retVal;
+}
+
+function oneInColumn() {
+	var retVal = false;
+	
+	return retVal;
+}
+
+function oneInRow() {
+	var retVal = false;
+	
+	return retVal;
+}
+
+// find and fill in any cells with only one possibility
+function singleton() {
+	var retVal = false;
+	
+	return retVal;
+}
+
+
 function solve(){
 	var r, c, cell;
 	// check the board
@@ -191,10 +228,26 @@ function solve(){
 		return;
 	}
 	// generate possible numbers for each cell
-	altPossCells();
 	generatePossibleCells();
-	clearBoardUsed();
-	// fill in singletons
+	while (true) {
+		if (clearBoardUsed() ) {
+			break; // exit if all filled
+		}
+		// fill in cells with only one possible value
+		if ( singleton() ) {
+			continue;
+		}
+		if ( oneInRow() ) {
+			continue;
+		}
+		if (oneInColumn() ){
+			continue();
+		}
+		if oneInBlock() ) {
+			continue;
+		}
+		//need to guess
+	}
 	
 }
 
