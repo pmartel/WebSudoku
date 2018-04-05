@@ -194,6 +194,8 @@ function generatePossibleCells() {
 	}
 } //generatePossibleCells()
 
+
+var styleString = 'color:orange;'
 // for each number, is there only one cell in a block with that possible number
 function oneInBlock() {
 	var retVal = false;
@@ -205,9 +207,30 @@ function oneInBlock() {
 		for ( bl= 0; bl < boardSize; bl++ ) {
 			rMin = Math.floor( bl / blockSize) * blockSize;
 			cMin = (bl % blockSize) * blockSize;
-			
-		}
-	}
+			count = 0;
+			for ( r = rMin;  r < rMin + blockSize; r++ ) {
+				for ( c = cMin;  c < cMin+blockSize; c++ ){
+					if ( possibleBoard[r][c].indexOf( v ) >= 0 ) { // v is a possibility for this cell
+						count++;
+						if ( count > 1 ) {
+							break;
+						}
+						rIdx = r;
+						cIdx = c;
+					} // if possibleboard
+				} // for c
+				if ( count > 1 ) { // extend break past for r
+					break;
+				}
+				
+			} // for r
+			if ( count == 1 )  {
+				document.getElementById(  ('c'+rIdx)+cIdx).value = possibleArray[n];
+				document.getElementById(  ('c'+rIdx)+cIdx).style = styleString;
+				retVal = true;
+			}
+		} // for bl
+	} // for n
 	return retVal;
 } //oneInBlock()
 
@@ -231,7 +254,7 @@ function oneInColumn() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
-				document.getElementById(  ('c'+rIdx)+c).style = 'color:lightgreen;';
+				document.getElementById(  ('c'+rIdx)+c).style = styleString;
 				retVal = true;
 			}
 		}
@@ -259,7 +282,7 @@ function oneInRow() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
-				document.getElementById(  ('c'+r)+cIdx).style = 'color:lightgreen;';
+				document.getElementById(  ('c'+r)+cIdx).style = styleString;
 				retVal = true;
 			}
 		}
@@ -277,7 +300,7 @@ function singleton() {
 			if ( possibleBoard[r][c].length == 1 ) {
 				v = possibleBoard[r][c];
 				document.getElementById(  ('c'+r)+c).value = v[0];
-				document.getElementById(  ('c'+r)+c).style = 'color:lightgreen;';
+				document.getElementById(  ('c'+r)+c).style = styleString;
 				retVal = true;
 			}
 		}
@@ -313,7 +336,8 @@ function solve() {
 			continue;
 		}
 		//need to guess
-		debugger;
+		console.log( 'not deterministic');
+		break;
 	}
 	
 } // solve()
