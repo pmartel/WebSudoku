@@ -181,9 +181,9 @@ function displayStatus( s ) {
 	var t0,t1; 
 	document.getElementById('solution_step').innerHTML = s;
 	t1 = t0 = Date.now();
-	// while ((t1 - t0) < 100 ) {
-		// t1 = Date.now();
-	// } // delay
+	while ((t1 - t0) < 20 ) {
+		t1 = Date.now();
+	} // delay
 }
 
 
@@ -305,6 +305,15 @@ function oneInRow() {
 } // oneInRow()
 
 // find and fill in any cells with only one possibility
+var stepContext;
+
+function setupStatusCanvas() {
+var canvas = document.getElementById("solution_step");
+var stepContext = canvas.getContext("2d");
+stepContext.font = "15px Arial";
+stepContext.fillText("check board",10,50);
+}
+
 function singleton() {
 	var retVal = false;
 	var r, c, v;
@@ -326,6 +335,9 @@ function singleton() {
 
 function solve() {
 	var r, c, cell;
+	
+	// set up to display status
+	setupStatusCanvas();
 	// check the board
 	if (!boardOk()){
 		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
