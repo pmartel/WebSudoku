@@ -304,16 +304,20 @@ function oneInRow() {
 	return retVal;
 } // oneInRow()
 
-// find and fill in any cells with only one possibility
+// set up to display status
 var stepContext;
+var stepState = "";
 
 function setupStatusCanvas() {
 var canvas = document.getElementById("solution_step");
 var stepContext = canvas.getContext("2d");
 stepContext.font = "15px Arial";
-stepContext.fillText("check board",10,50);
+setInterval(updateStatusCanvas, 20);
+displayStatus("check board");
+
 }
 
+	// find and fill in any cells with only one possibility
 function singleton() {
 	var retVal = false;
 	var r, c, v;
@@ -370,3 +374,6 @@ function solve() {
 	
 } // solve()
 
+function updateStatusCanvas() {
+	stepContext
+}
