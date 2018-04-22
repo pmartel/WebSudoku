@@ -176,6 +176,17 @@ function clearCellUsed( row, col, val ) {
 		
 } //clearCellUsed( row, col, val )
 
+function displayStatus( s ) {
+	var d = new Date();
+	var t0,t1; 
+	document.getElementById('solution_step').innerHTML = s;
+	t1 = t0 = Date.now();
+	// while ((t1 - t0) < 100 ) {
+		// t1 = Date.now();
+	// } // delay
+}
+
+
 // add/reset the property .possible on all cells  
 var possibleBoard = [];
 
@@ -202,6 +213,7 @@ function oneInBlock() {
 	var r, c, v, n, count, rIdx, cIdx ;
 	var bl, rMin, cMin;
 	
+	displayStatus( "one in block");
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( bl= 0; bl < boardSize; bl++ ) {
@@ -239,6 +251,7 @@ function oneInColumn() {
 	var retVal = false;
 	var r, c, v, n, count, rIdx ;
 	
+	displayStatus( "one in column");
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( c = 0; c < boardSize; c++) {
@@ -267,6 +280,7 @@ function oneInRow() {
 	var retVal = false;
 	var r, c, v, n, count, cIdx ;
 	
+	displayStatus( "one in row");
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( r = 0; r < boardSize; r++) {
@@ -295,6 +309,7 @@ function singleton() {
 	var retVal = false;
 	var r, c, v;
 	
+	displayStatus( "singletons");
 	for ( r = 0; r < boardSize; r++) {
 		for ( c = 0; c < boardSize; c++ ) {
 			if ( possibleBoard[r][c].length == 1 ) {
@@ -339,6 +354,7 @@ function solve() {
 		console.log( 'not deterministic');
 		break;
 	}
+	document.getElementById('solution_step').innerHTML = "done";
 	
 } // solve()
 
