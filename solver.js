@@ -345,6 +345,7 @@ function solve() {
 		}
 		//need to guess
 		console.log( 'not deterministic');
+		guesser();
 		break;
 	}
 	
