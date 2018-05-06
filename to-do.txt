@@ -1,0 +1,7 @@
+To-do:
+Things to make the Sudoku program better.  Not in priority order
+1. get guesser working
+2. arrow keys move focus
+3. double click shows options
+4. display work by making solver a state machine and driving it with timer ticks
+
