@@ -18,6 +18,7 @@ var gameStack = {};
 function guesser() {
 	var r,c;
 	
+	console.log('guessing');
 	generatePossibleCells();
 	if( clearBoardUsed()){
 		// filled
