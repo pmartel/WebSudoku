@@ -70,7 +70,9 @@ function loadBoard() {
 	}
 	if (!boardOk(document.getElementById('board')) ) {
 		alert("board being loaded is bad");
+		setSolveBackground('red');
 	}
+	 setSolveBackground('#E3E3E3');
 }
 
 
@@ -110,6 +112,7 @@ function newBoard( n = 3 ) {
 		s += "</tr>";
 	}
 	b.innerHTML = s;
+	 setSolveBackground('#E3E3E3');
 }
 
 // Copy the data from the board to the File block
@@ -138,6 +141,10 @@ function saveBoard() {
 		s += '\n';
 	}
 	f.value = s;
+}
+
+function setSolveBackground( c ) {
+	document.getElementById("solveButton").style.backgroundColor = c;
 }
 
 function thisSet(t){

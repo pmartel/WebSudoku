@@ -319,15 +319,19 @@ function singleton() {
 
 function solve() {
 	var r, c, cell;
+	
+	 setSolveBackground('yellow'); // working
 	// check the board
 	if (!boardOk()){
 		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
+		setSolveBackground('red'); // bad
 		return;
 	}
 	while (true) {
 		// generate possible numbers for each cell
 		generatePossibleCells();
 		if (clearBoardUsed() ) {
+		 setSolveBackground('lightgreen'); // ok
 			break; // exit if all filled
 		}
 		// fill in cells with only one possible value
