@@ -15,6 +15,32 @@ var guess = {};
 // the gameStack has a boardString a guess and a "pointer" to the previous stack element 
 var gameStack = {};
 
+// set up a blank boardSize x boardSize array
+function blankBoard(){
+	var n;
+	var b = new Array(boardSize);
+	for ( n = 0; n < boardSize; n++ ) {
+		b[n] = new Array(boardSize);
+	}
+	return b;
+}
+
+// copy the game cells into an array
+function copyBoard(){
+	var r, c, cell;
+	var b = blankBoard();
+
+	for ( r = 0; r<boardSize; r++) {
+		for ( c = 0; c<boardSize; c++) { 
+	
+			cell = document.getElementById(('c'+r)+c);
+			b[r][c] = cell.value;
+		}
+	}
+	
+	return b;
+}
+
 function guesser() {
 	var r,c;
 	
@@ -28,8 +54,8 @@ function guesser() {
 	
 }
 
-//function 
 function pushGame() {
+	var b = copyBoard();
 	
 }
 
