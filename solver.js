@@ -180,18 +180,23 @@ function clearCellUsed( row, col, val ) {
 var possibleBoard = [];
 
 function generatePossibleCells() {
-	var r,c, t;
+	var n, t, possibleCol = [], possibleBoard=[];
 	
-	for ( r = boardSize-1; r >=0; r-- ) {
-		possibleBoard[r] = [];
-		for ( c = boardSize-1; c >=0; c-- ) {
-//			possibleBoard[r][c] = Array(possibleArray);
-// the above makes each entry in possible board an array of length 1 containing possibleArray
-// as its only element.  Below makes each entry a copy of possibleArray
-			t= [];
-			possibleBoard[r][c] = t.concat(possibleArray);
-		}
+/*	for ( n = 0; n < boardSize; n++) {
+		possibleCol.push(possibleArray);
 	}
+	possibleBoard = [];
+	for ( n = 0; n < boardSize; n++) {
+		possibleBoard.push(new possibleCol);
+	}*/
+	for ( n = 0; n < boardSize; n++) {
+		possibleCol.push([]);
+	}
+	possibleBoard = [];
+	for ( n = 0; n < boardSize; n++) {
+		possibleBoard.push(possibleCol);
+	}
+	possibleBoard.fill(possibleArray);
 } //generatePossibleCells()
 
 
