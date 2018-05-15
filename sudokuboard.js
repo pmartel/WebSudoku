@@ -20,7 +20,7 @@ function about() {
 	alert(aboutStr);
 }
 
-// note, we can vary this with boardSize.  If we go to a 16x16 board,
+// note, we can vary lthis with boardSize.  If we go to a 16x16 board,
 //  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
 var possibleArray = ['1','2','3','4','5','6','7','8','9'];
 
