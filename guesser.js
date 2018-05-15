@@ -10,10 +10,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 // a guess is an object with a row, column and value
-var guess = {};
+var guess = {b:undefined, r:undefined, c:undefined, v:undefined};
 
-// the gameStack has a boardString a guess and a "pointer" to the previous stack element 
-var gameStack = {};
+// the guessStack has a boardArray and a guess 
+var guessStack = [];
 
 // set up a blank boardSize x boardSize array
 function blankBoard(){
@@ -42,7 +42,7 @@ function copyBoard(){
 }
 
 function guesser() {
-	var r,c;
+	var g;
 	
 	console.log('guessing');
 	generatePossibleCells();
@@ -50,11 +50,31 @@ function guesser() {
 		// filled
 		return;
 	}
-	pushGame();
+	g = makeGuess();
+	pushGame(g);
 	
 }
 
-function pushGame() {
+function makeGuess() {
+	var g = {r:undefined, c:undefined, v:undefined};
+	var pB, r, c, n;
+	
+	// find (one of) the cell with the minimun number of possibilities
+	n = 9;
+	for ( r = 0; r<boardSize; r++) {
+		for ( c = 0; c<boardSize; c++) {
+			pB = possibleBoard[r][c];
+			if ( pB.length != 0 && pB.length < n ){
+				g.r = r; g.c = c;
+				n = pB.length;
+			}
+		}
+	}
+	g.v = possibleBoard[g.r][g.c][0];
+	return g;
+}
+
+function pushGame(g) {
 	var b = copyBoard();
 	
 }
