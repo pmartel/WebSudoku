@@ -10,10 +10,29 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 // a guess is an object with a row, column and value
-var guess = {b:undefined, r:undefined, c:undefined, v:undefined};
+function Guess( row, col, val ) {
+	this.row = row;
+	this.column = col;
+	this.value = val;
+}
+
+function GuessElement( board, guess ) {
+	this.board = board;
+	this.guess = guess;
+}
+
 
 // the guessStack has a boardArray and a guess 
 var guessStack = [];
+
+function applyGuess(g) {
+	var s, cell;
+	
+	s =( 'c' + g.row)+g.column;
+	cell = document.getElementById(s);
+	cell.value = g.value;	
+	cell.style = styleString;
+}
 
 // set up a blank boardSize x boardSize array
 function blankBoard(){
@@ -56,7 +75,7 @@ function guesser() {
 }
 
 function makeGuess() {
-	var g = {r:undefined, c:undefined, v:undefined};
+	var g = new Guess;
 	var pB, r, c, n;
 	
 	// find (one of) the cell with the minimun number of possibilities
@@ -65,17 +84,19 @@ function makeGuess() {
 		for ( c = 0; c<boardSize; c++) {
 			pB = possibleBoard[r][c];
 			if ( pB.length != 0 && pB.length < n ){
-				g.r = r; g.c = c;
+				g.row= r; g.column = c;
 				n = pB.length;
 			}
 		}
 	}
-	g.v = possibleBoard[g.r][g.c][0];
+	g.value = possibleBoard[g.row][g.column][0];
 	return g;
 }
 
 function pushGame(g) {
-	var b = copyBoard();
-	
+	// save current game and new guess
+	var ge = new GuessElement(copyBoard(), g);
+	guessStack.push( ge );
+	applyGuess( g );
 }
 
