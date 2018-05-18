@@ -329,13 +329,23 @@ function solve() {
 		setSolveBackground('red'); // bad
 		return;
 	}
+	console.log( 'deterministic');
+	if ( !solveDeterministic() ) {
+		console.log( 'not deterministic');
+		guesser();
+	}
+	
+} // solve()
+
+function solveDeterministic() {
+	var solved = false;
+
 	while (true) {
 		// generate possible numbers for each cell
 		generatePossibleCells();
 		if (clearBoardUsed() ) {
-		console.log( 'deterministic');
-		 setSolveBackground('lightgreen'); // ok
-			break; // exit if all filled
+			setSolveBackground('lightgreen'); // ok
+			return true; // exit if all filled
 		}
 		// fill in cells with only one possible value
 		if ( singleton() ) {
@@ -350,11 +360,9 @@ function solve() {
 		if ( oneInBlock() ) {
 			continue;
 		}
-		//need to guess
-		console.log( 'not deterministic');
-		guesser();
-		break;
+		//need to guess or no more guesses
+		return false;
 	}
 	
-} // solve()
-
+	return false; // should never get here
+}

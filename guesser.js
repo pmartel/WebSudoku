@@ -10,6 +10,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 // a guess is an object with a row, column and value
+// 5/18/18 let value be the array of possible values.  This lets us "cross them off"
+// until there are none left
 function Guess( row, col, val ) {
 	this.row = row;
 	this.column = col;
@@ -61,17 +63,27 @@ function copyBoard(){
 }
 
 function guesser() {
-	var g;
+	var g, g1;
 	
 	console.log('guessing');
 	generatePossibleCells();
 	if( clearBoardUsed()){
 		// filled
-		return;
+		return true;
 	}
 	g = makeGuess();
 	pushGame(g);
-	
+	// g has a position and an array of possible values
+	// this loop runs through the array until the board is complete
+	// or there is a conflict
+	while( g.value.length > 0 ) {
+		g1 = new Guess(g.row, g.column, g.value.pop());
+		applyGuess( g1 );
+		if ( solveDeterministic()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function makeGuess() {
@@ -89,14 +101,14 @@ function makeGuess() {
 			}
 		}
 	}
-	g.value = possibleBoard[g.row][g.column][0];
+	g.value = possibleBoard[g.row][g.column];
 	return g;
 }
 
+// save current game and new guesses
 function pushGame(g) {
-	// save current game and new guess
 	var ge = new GuessElement(copyBoard(), g);
 	guessStack.push( ge );
-	applyGuess( g );
 }
+
 
