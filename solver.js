@@ -202,7 +202,7 @@ function oneInBlock() {
 	var r, c, v, n, count, rIdx, cIdx ;
 	var bl, rMin, cMin;
 	
-	//console.log('one-in-box');
+	console.log('one-in-box');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( bl= 0; bl < boardSize; bl++ ) {
@@ -227,7 +227,7 @@ function oneInBlock() {
 			} // for r
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+cIdx).value = possibleArray[n];
-				//console.log( ('c'+rIdx)+cIdx + " "+ possibleArray[n]);
+				console.log( ('c'+rIdx)+cIdx + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+rIdx)+cIdx).style = styleString;
 				retVal = true;
 			}
@@ -241,7 +241,7 @@ function oneInColumn() {
 	var retVal = false;
 	var r, c, v, n, count, rIdx ;
 	
-	//console.log('one-in-column');
+	console.log('one-in-column');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( c = 0; c < boardSize; c++) {
@@ -257,7 +257,7 @@ function oneInColumn() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
-				//console.log( ('c'+rIdx)+c + " "+ possibleArray[n]);
+				console.log( ('c'+rIdx)+c + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+rIdx)+c).style = styleString;
 				retVal = true;
 			}
@@ -271,7 +271,7 @@ function oneInRow() {
 	var retVal = false;
 	var r, c, v, n, count, cIdx ;
 	
-	//console.log('one-in-row');
+	console.log('one-in-row');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( r = 0; r < boardSize; r++) {
@@ -287,7 +287,7 @@ function oneInRow() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
-				//console.log( ('c'+r)+cIdx + " "+ possibleArray[n]);
+				console.log( ('c'+r)+cIdx + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+r)+cIdx).style = styleString;
 				retVal = true;
 			}
@@ -301,12 +301,12 @@ function singleton() {
 	var retVal = false;
 	var r, c, v;
 	
-	//console.log('singletons');
+	console.log('singletons');
 	for ( r = 0; r < boardSize; r++) {
 		for ( c = 0; c < boardSize; c++ ) {
 			if ( possibleBoard[r][c].length == 1 ) {
 				v = possibleBoard[r][c];
-				//console.log( ('c'+r)+c + " "+v[0]);
+				console.log( ('c'+r)+c + " "+v[0]);
 				document.getElementById(  ('c'+r)+c).value = v[0];
 				document.getElementById(  ('c'+r)+c).style = styleString;
 				retVal = true;
@@ -344,6 +344,11 @@ function solveDeterministic() {
 		// generate possible numbers for each cell
 		generatePossibleCells();
 		if (clearBoardUsed() ) {
+			if (!boardOk()) {
+				alert( "solver failed" );
+				setSolveBackground('red'); // bad
+				return true;
+			}
 			setSolveBackground('lightgreen'); // ok
 			return true; // exit if all filled
 		}
