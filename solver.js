@@ -111,7 +111,7 @@ function checkRow(t, key) {
 	return true;
 } // checkRow(t, key)
 
-// clear used or i values from possibleBoard
+// clear used values from possibleBoard
 // returns true if board is full
 function clearBoardUsed(b) {
 	var r, c, val;

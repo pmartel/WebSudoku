@@ -30,6 +30,7 @@ var guessStack = [];
 function applyGuess(g) {
 	var s, cell;
 	
+	console.log ( "guess (" + g.row+ ',' + g.column  +") is " + g.value );
 	s =( 'c' + g.row)+g.column;
 	cell = document.getElementById(s);
 	cell.value = g.value;	
@@ -46,33 +47,18 @@ function blankBoard(){
 	return b;
 }
 
-// copy the game cells into an array
-function copyBoard(){
-	var r, c, cell;
-	var b = blankBoard();
-
-	for ( r = 0; r<boardSize; r++) {
-		for ( c = 0; c<boardSize; c++) { 
-	
-			cell = document.getElementById(('c'+r)+c);
-			b[r][c] = cell.value;
-		}
-	}
-	
-	return b;
-}
-
 function guesser() {
 	var g, g1;
-	
+	var b;
 	console.log('guessing');
 	generatePossibleCells();
 	if( clearBoardUsed()){
 		// filled
 		return true;
 	}
-	g = makeGuess();
-	pushGame(g);
+	b = saveBoard();
+	g = listGuesses();
+
 	// g has a position and an array of possible values
 	// this loop runs through the array until the board is complete
 	// or there is a conflict
@@ -82,11 +68,19 @@ function guesser() {
 		if ( solveDeterministic()) {
 			return true;
 		}
+		// are there and cells with no option?
+		if ( noOptions() ) {
+			console.log( "bad guess: ("  + g1.row + "," + g1.column + ") is not " + g1.value );
+			restoreBoard(b);  // backtrack this guess
+		} 
+		else {
+			return guesser(); // make another guess
+		}
 	}
 	return false;
 }
 
-function makeGuess() {
+function listGuesses() {
 	var g = new Guess;
 	var pB, r, c, n;
 	
@@ -105,10 +99,54 @@ function makeGuess() {
 	return g;
 }
 
-// save current game and new guesses
-function pushGame(g) {
-	var ge = new GuessElement(copyBoard(), g);
-	guessStack.push( ge );
+//are there any cells that are empty, but have no options?
+function noOptions() {
+	var r, c, cell;
+	
+	generatePossibleCells();
+	if( clearBoardUsed()) {
+		// filled
+		return false; // no empty cells
+	}
+	for ( r = 0; r < boardSize; r++ ) {
+		for ( c = 0; c < boardSize; c++ ) {
+			if ( possibleBoard[r][c].length == 0 ){
+				cell = document.getElementById( ('c'+r)+c );
+				if ( cell.value == " " || cell.value == "" ) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 }
 
 
+
+function restoreBoard( b ) {
+	var r, c;
+	var cell;
+	
+	for ( r = 0; r < boardSize; r++ ) {
+		for ( c = 0; c < boardSize; c++ ) {
+			cell = document.getElementById( ('c'+r)+c );
+			cell.value = b[r][c];
+		}
+	}
+}
+
+// copy the game cells into an array
+function saveBoard(){
+	var r, c, cell;
+	var b = blankBoard();
+
+	for ( r = 0; r<boardSize; r++) {
+		for ( c = 0; c<boardSize; c++) { 
+	
+			cell = document.getElementById(('c'+r)+c);
+			b[r][c] = cell.value;
+		}
+	}
+	
+	return b;
+}
