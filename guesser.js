@@ -49,7 +49,7 @@ function blankBoard(){
 
 function guesser() {
 	var g, g1;
-	var b;
+	var b, retVal;
 	console.log('guessing');
 	generatePossibleCells();
 	if( clearBoardUsed()){
@@ -74,7 +74,12 @@ function guesser() {
 			restoreBoard(b);  // backtrack this guess
 		} 
 		else {
-			return guesser(); // make another guess
+			if( guesser()){
+				return true; // solved
+			}
+			// make another guess
+			console.log( "bad guess: ("  + g1.row + "," + g1.column + ") is not " + g1.value );
+			restoreBoard(b);  // backtrack this guess
 		}
 	}
 	return false;

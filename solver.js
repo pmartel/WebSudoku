@@ -198,7 +198,6 @@ function generatePossibleCells() {
 var styleString = 'color:orange;'
 // for each number, is there only one cell in a block with that possible number
 function oneInBlock() {
-	var retVal = false;
 	var r, c, v, n, count, rIdx, cIdx ;
 	var bl, rMin, cMin;
 	
@@ -229,16 +228,15 @@ function oneInBlock() {
 				document.getElementById(  ('c'+rIdx)+cIdx).value = possibleArray[n];
 				console.log( ('c'+rIdx)+cIdx + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+rIdx)+cIdx).style = styleString;
-				retVal = true;
+				return true;
 			}
 		} // for bl
 	} // for n
-	return retVal;
+	return false;
 } //oneInBlock()
 
 // for each number, is there only one cell in a column with that possible number
 function oneInColumn() {
-	var retVal = false;
 	var r, c, v, n, count, rIdx ;
 	
 	console.log('one-in-column');
@@ -259,16 +257,15 @@ function oneInColumn() {
 				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
 				console.log( ('c'+rIdx)+c + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+rIdx)+c).style = styleString;
-				retVal = true;
+				return true;
 			}
 		}
 	}
-	return retVal;
+	return false;
 } //oneInColumn()
 
 // for each number, is there only one cell in a row with that possible number
 function oneInRow() {
-	var retVal = false;
 	var r, c, v, n, count, cIdx ;
 	
 	console.log('one-in-row');
@@ -289,16 +286,15 @@ function oneInRow() {
 				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
 				console.log( ('c'+r)+cIdx + " "+ possibleArray[n]);
 				document.getElementById(  ('c'+r)+cIdx).style = styleString;
-				retVal = true;
+				return true;
 			}
 		}
 	}
-	return retVal;
+	return false;
 } // oneInRow()
 
 // find and fill in any cells with only one possibility
 function singleton() {
-	var retVal = false;
 	var r, c, v;
 	
 	console.log('singletons');
@@ -309,12 +305,12 @@ function singleton() {
 				console.log( ('c'+r)+c + " "+v[0]);
 				document.getElementById(  ('c'+r)+c).value = v[0];
 				document.getElementById(  ('c'+r)+c).style = styleString;
-				retVal = true;
+				return true;
 			}
 		}
 	}
 				
-	return retVal;
+	return false;
 } //singleton()
 
 function solve() {
