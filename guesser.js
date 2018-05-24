@@ -62,6 +62,13 @@ function guesser() {
 	// g has a position and an array of possible values
 	// this loop runs through the array until the board is complete
 	// or there is a conflict
+	// if g is undefined, the board was bad.
+	if ( g.value == undefined ) {
+		alert( "This board  can't be solved.\nThere are no possible guesses.");
+		setSolveBackground('red'); // bad
+		return false;
+
+	}
 	while( g.value.length > 0 ) {
 		g1 = new Guess(g.row, g.column, g.value.pop());
 		applyGuess( g1 );
@@ -90,7 +97,7 @@ function listGuesses() {
 	var pB, r, c, n;
 	
 	// find (one of) the cell with the minimun number of possibilities
-	n = 9;
+	n = boardSize+1;
 	for ( r = 0; r<boardSize; r++) {
 		for ( c = 0; c<boardSize; c++) {
 			pB = possibleBoard[r][c];
@@ -100,7 +107,10 @@ function listGuesses() {
 			}
 		}
 	}
-	g.value = possibleBoard[g.row][g.column];
+	// it's possible that there will be no guess if the board is bad
+	if ( g.column != undefined ) {
+		g.value = possibleBoard[g.row][g.column];
+	}
 	return g;
 }
 
