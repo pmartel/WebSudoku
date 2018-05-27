@@ -23,10 +23,6 @@ function GuessElement( board, guess ) {
 	this.guess = guess;
 }
 
-
-// the guessStack has a boardArray and a guess 
-var guessStack = [];
-
 function applyGuess(g) {
 	var s, cell;
 	
@@ -56,7 +52,7 @@ function guesser() {
 		// filled
 		return true;
 	}
-	b = saveBoard();
+	b = storeBoard();
 	g = listGuesses();
 
 	// g has a position and an array of possible values
@@ -151,7 +147,7 @@ function restoreBoard( b ) {
 }
 
 // copy the game cells into an array
-function saveBoard(){
+function storeBoard(){
 	var r, c, cell;
 	var b = blankBoard();
 
