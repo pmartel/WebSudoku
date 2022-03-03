@@ -1,0 +1,148 @@
+47.....58
+58.7.4.91
+...5.1...
+.24...51.
+.........
+.58...94.
+...8.5...
+84.1.3.65
+13.....82
+
+Solution
+solver.js:324 Solving puzzle
+solver.js:332 deterministic
+solver.js:304 singletons
+solver.js:309 c76 7
+solver.js:304 singletons
+solver.js:309 c67 3
+solver.js:304 singletons
+solver.js:309 c86 4
+solver.js:304 singletons
+solver.js:309 c66 1
+solver.js:304 singletons
+solver.js:309 c68 9
+solver.js:304 singletons
+solver.js:309 c61 6
+solver.js:304 singletons
+solver.js:309 c21 9
+solver.js:304 singletons
+solver.js:309 c41 1
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c02 1
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c54 1
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c28 4
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c64 4
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c43 4
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c44 5
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c82 5
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c27 7
+solver.js:304 singletons
+solver.js:309 c47 2
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c24 8
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c35 8
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c46 8
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+solver.js:233 c74 2
+solver.js:304 singletons
+solver.js:309 c72 9
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+solver.js:334 not deterministic
+guesser.js:49 guessing
+guesser.js:29 guess (1,4) is 6
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c06 6
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+guesser.js:49 guessing
+guesser.js:29 guess (0,4) is 9
+solver.js:304 singletons
+solver.js:309 c05 2
+solver.js:304 singletons
+solver.js:309 c03 3
+solver.js:304 singletons
+solver.js:309 c84 7
+solver.js:304 singletons
+solver.js:309 c34 3
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:291 c53 2
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+guesser.js:49 guessing
+guesser.js:29 guess (1,2) is 3
+solver.js:304 singletons
+solver.js:309 c16 2
+solver.js:304 singletons
+solver.js:309 c26 3
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+guesser.js:49 guessing
+guesser.js:29 guess (2,0) is 6
+solver.js:304 singletons
+solver.js:309 c22 2
+solver.js:304 singletons
+solver.js:309 c62 7
+solver.js:304 singletons
+solver.js:309 c42 6
+solver.js:304 singletons
+solver.js:309 c60 2
+solver.js:304 singletons
+solver.js:275 one-in-row
+solver.js:246 one-in-column
+solver.js:208 one-in-box
+guesser.js:49 guessing
+guesser.js:29 guess (3,0) is 9
+solver.js:304 singletons
+solver.js:309 c33 6
+solver.js:304 singletons
+solver.js:309 c38 7
+solver.js:304 singletons
+solver.js:309 c48 3
+solver.js:304 singletons
+solver.js:309 c40 7
+solver.js:304 singletons
+solver.js:309 c45 9
+solver.js:304 singletons
+solver.js:309 c50 3
+solver.js:304 singletons
+solver.js:309 c55 7
+solver.js:304 singletons
+solver.js:309 c58 6
+solver.js:304 singletons
+solver.js:309 c83 9
+solver.js:304 singletons
+solver.js:309 c85 6

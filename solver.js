@@ -1,4 +1,4 @@
-/* Copyright  2018 Philip O. Martel 
+/* Copyright  2018-2022 Philip O. Martel 
 Released under the MIT License:
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software 
 without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to 
@@ -19,6 +19,10 @@ var auxBoard;
 
 function aboutCheckEntry() {
 	alert("Checking this box checks if there are any conflicts with the digit entered, not whether the entry is correct");
+}
+
+function aboutExplain() {
+	alert( "Checking the Explain box causes the solver to pause with a reason for every cell solved.  Checking the log box causes the solver to save a log of the reasons.")
 }
 
 function boardOk() {
@@ -303,8 +307,11 @@ function singleton() {
 			if ( possibleBoard[r][c].length == 1 ) {
 				v = possibleBoard[r][c];
 				console.log( ('c'+r)+c + " "+v[0]);
-				document.getElementById(  ('c'+r)+c).value = v[0];
-				document.getElementById(  ('c'+r)+c).style = styleString;
+				elem = document.getElementById(  ('c'+r)+c);
+				elem.value = v[0];
+				elem.style = styleString;
+				//alert( displayRC( r, c ) + " can only have the value " + v[0] )
+				//thisSet(elem);
 				return true;
 			}
 		}

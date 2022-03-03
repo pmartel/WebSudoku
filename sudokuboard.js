@@ -5,7 +5,7 @@
 
  var aboutStr = '\n\
  HTML and Javascript Sudoku program\n\n\
- Copyright  2018 Philip O. Martel \n\
+ Copyright  2018-2022 Philip O. Martel \n\
 Released under the MIT License:\n\
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software \
 without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit \ persons to whom the Software is furnished to do so, subject to the following conditions:\n\
@@ -20,11 +20,18 @@ function about() {
 	alert(aboutStr);
 }
 
+// The row and column in the explanation (and log) should run from 1-9
+// left to right and top down.  Output a string with fixed row and column
+function displayRC( intR, intC ) {
+	return "the cell in row " + (9-intR) + ", column " + (intC + 1);
+}
+
+
 // note, we can vary this with boardSize.  If we go to a 16x16 board,
 //  I'll use 0-9 and a-f as I saw in Honolulu to keep things to 1 character
 var possibleArray = ['1','2','3','4','5','6','7','8','9'];
 
-function isLegit(c) { // ckeck if character c is legitimare
+function isLegit(c) { // check if character c is legitimate
 	// Enter or space should clear a value they and the possible values array are legitimate
 	var legit = [ 'Enter', ' '].concat( possibleArray);
 	var x;
