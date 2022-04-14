@@ -30,15 +30,15 @@ function boardOk() {
 			v = cell.value;
 			if (!( v == ''  || v == ' ')){ // not a blank
 				if ( !checkBlock(cell, v) ) {
-					cell.style = 'color:red;';
+					cell.style = badStyle;
 					return false;
 				}
 				if ( !checkCol(cell, v) ) {
-					cell.style = 'color:red;';
+					cell.style = badStyle;
 					return false;
 				}
 				if ( !checkRow(cell, v) ) {
-					cell.style = 'color:red;';
+					cell.style = badStyle;
 					return false;
 				}
 			}
