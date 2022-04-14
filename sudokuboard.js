@@ -59,10 +59,10 @@ function loadBoard() {
 				bl.value = c;
 				// loaded numbers can not be changed in game
 				if ( c.length > 0 ) { 
-					bl.style = 'color:blue;';
+					bl.style = loadedStyle;
 					bl.readOnly = true;
 				} else {
-					bl.style = 'color:black;';
+					bl.style = entryStyle;
 					bl.readOnly = false;
 				}
 				col++;
@@ -162,12 +162,12 @@ function thisSet(t){
 	// t.value has the current value, but I can't seem to write to either.
 	if( document.getElementById("checkEntry").checked ) {
 		if ( checkEntry( t, key ) ){
-			t.style = 'color:black;';
+			t.style = entryStyle;
 		} else  {
-			t.style = 'color:red;';
+			t.style = badStyle;
 		}
 	} else {
-		t.style = 'color:black;';
+		t.style = entryStyle;
 	}
 	var rc = thisRC(t);
 //	setAuxBoard( rc.r, rc.c, key);
