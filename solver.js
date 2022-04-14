@@ -335,8 +335,10 @@ function solve() {
 
 function solveDeterministic() {
 	var solved = false;
-
-	while (true) {
+	var continueSolving = true;
+	
+	while (continueSolving) {
+		continueSolving = document.getElementById("loop").checked;
 		// generate possible numbers for each cell
 		generatePossibleCells();
 		if (clearBoardUsed() ) {
@@ -346,7 +348,7 @@ function solveDeterministic() {
 				return true;
 			}
 			setSolveBackground('lightgreen'); // ok
-			return true; // exit if all filled
+			return true; // exit if all cells filled
 		}
 		// fill in cells with only one possible value
 		if ( singleton() ) {
@@ -363,6 +365,9 @@ function solveDeterministic() {
 		}
 		//need to guess or no more guesses
 		return false;
+	}
+	if (!continueSolving) {
+		return true; // Solve single cell
 	}
 	
 	return false; // should never get here
