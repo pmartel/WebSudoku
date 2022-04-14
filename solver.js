@@ -194,8 +194,13 @@ function generatePossibleCells() {
 	}
 } //generatePossibleCells()
 
+//colors for cells
+const deterministicStyle = 'color:orange;'
+const guessStyle = "color:purple";
+const badStyle = "color:red";
+const entryStyle = "color:black";
+const loadedStyle = "color:blue";
 
-var styleString = 'color:orange;'
 // for each number, is there only one cell in a block with that possible number
 function oneInBlock() {
 	var r, c, v, n, count, rIdx, cIdx ;
@@ -227,7 +232,7 @@ function oneInBlock() {
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+cIdx).value = possibleArray[n];
 				console.log( ('c'+rIdx)+cIdx + " "+ possibleArray[n]);
-				document.getElementById(  ('c'+rIdx)+cIdx).style = styleString;
+				document.getElementById(  ('c'+rIdx)+cIdx).style = deterministicStyle;
 				return true;
 			}
 		} // for bl
@@ -256,7 +261,7 @@ function oneInColumn() {
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
 				console.log( ('c'+rIdx)+c + " "+ possibleArray[n]);
-				document.getElementById(  ('c'+rIdx)+c).style = styleString;
+				document.getElementById(  ('c'+rIdx)+c).style = deterministicStyle;
 				return true;
 			}
 		}
@@ -285,7 +290,7 @@ function oneInRow() {
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
 				console.log( ('c'+r)+cIdx + " "+ possibleArray[n]);
-				document.getElementById(  ('c'+r)+cIdx).style = styleString;
+				document.getElementById(  ('c'+r)+cIdx).style = deterministicStyle;
 				return true;
 			}
 		}
@@ -304,7 +309,7 @@ function singleton() {
 				v = possibleBoard[r][c];
 				console.log( ('c'+r)+c + " "+v[0]);
 				document.getElementById(  ('c'+r)+c).value = v[0];
-				document.getElementById(  ('c'+r)+c).style = styleString;
+				document.getElementById(  ('c'+r)+c).style = deterministicStyle;
 				return true;
 			}
 		}
