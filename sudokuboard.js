@@ -59,7 +59,7 @@ function loadBoard() {
 				continue;
 			case '.':
 				c = '';
-				// FALL=THROUGH
+				// FALL-THROUGH
 			default:
 				idStr = ('c'+row)+col;
 				var bl = document.getElementById(idStr);
@@ -80,6 +80,7 @@ function loadBoard() {
 		setSolveBackground('red');
 	}
 	 setSolveBackground('#E3E3E3');
+	 document.getElementById('reasons').innerHTML = "Loading board\n"
 }
 
 
@@ -119,7 +120,8 @@ function newBoard( n = 3 ) {
 		s += "</tr>";
 	}
 	b.innerHTML = s;
-	 setSolveBackground('#E3E3E3');
+	setSolveBackground('#E3E3E3');
+	document.getElementById('reasons').innerHTML = "New board\n"
 }
 
 // Copy the data from the board to the File block

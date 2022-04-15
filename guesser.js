@@ -26,7 +26,7 @@ function GuessElement( board, guess ) {
 function applyGuess(g) {
 	var s, cell;
 	
-	console.log ( "guess (" + g.row+ ',' + g.column  +") is " + g.value );
+	reason( "guessing c" + g.row + g.column  +" is " + g.value );
 	s =( 'c' + g.row)+g.column;
 	cell = document.getElementById(s);
 	cell.value = g.value;	
@@ -46,7 +46,7 @@ function blankBoard(){
 function guesser() {
 	var g, g1;
 	var b, retVal;
-	console.log('guessing');
+	//console.log('guessing');
 	generatePossibleCells();
 	if( clearBoardUsed()){
 		// filled
@@ -60,7 +60,7 @@ function guesser() {
 	// or there is a conflict
 	// if g is undefined, the board was bad.
 	if ( g.value == undefined ) {
-		alert( "This board  can't be solved.\nThere are no possible guesses.");
+		reason( "This board  can't be solved.\nThere are no possible guesses.");
 		setSolveBackground('red'); // bad
 		return false;
 
@@ -73,7 +73,7 @@ function guesser() {
 		}
 		// are there and cells with no option?
 		if ( noOptions() ) {
-			console.log( "bad guess: ("  + g1.row + "," + g1.column + ") is not " + g1.value );
+			reason( "bad guess: c"  + g1.row + g1.column + " is not " + g1.value );
 			restoreBoard(b);  // backtrack this guess
 		} 
 		else {
@@ -81,7 +81,7 @@ function guesser() {
 				return true; // solved
 			}
 			// make another guess
-			console.log( "bad guess: ("  + g1.row + "," + g1.column + ") is not " + g1.value );
+			reason( "bad guess: c"  + g1.row  + g1.column + " is not " + g1.value );
 			restoreBoard(b);  // backtrack this guess
 		}
 	}

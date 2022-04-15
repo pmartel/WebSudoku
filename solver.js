@@ -22,7 +22,7 @@ function aboutCheckEntry() {
 }
 
 function aboutExplain() {
-	alert( "Checking the Explain box causes the solver to pause with a reason for every cell solved.  Checking the log box causes the solver to save a log of the reasons.")
+	alert( "Checking the Explain box causes the solver to pause with a reason for every cell solved.  Checking the log box causes the solver to  log the reasons.")
 }
 
 function boardOk() {
@@ -46,7 +46,6 @@ function boardOk() {
 					return false;
 				}
 			}
-
 		}
 	}
 	return true;
@@ -199,13 +198,13 @@ function generatePossibleCells() {
 } //generatePossibleCells()
 
 
-var styleString = 'color:orange;'
+var styleString = 'color:orange;';
+
 // for each number, is there only one cell in a block with that possible number
 function oneInBlock() {
 	var r, c, v, n, count, rIdx, cIdx ;
 	var bl, rMin, cMin;
 	
-	console.log('one-in-box');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( bl= 0; bl < boardSize; bl++ ) {
@@ -230,7 +229,7 @@ function oneInBlock() {
 			} // for r
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+cIdx).value = possibleArray[n];
-				console.log( ('c'+rIdx)+cIdx + " "+ possibleArray[n]);
+				reason( 'Only space for ' + possibleArray[n] + ' in box is ' + ('c'+rIdx)+cIdx );
 				document.getElementById(  ('c'+rIdx)+cIdx).style = styleString;
 				return true;
 			}
@@ -243,7 +242,6 @@ function oneInBlock() {
 function oneInColumn() {
 	var r, c, v, n, count, rIdx ;
 	
-	console.log('one-in-column');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( c = 0; c < boardSize; c++) {
@@ -259,7 +257,7 @@ function oneInColumn() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+rIdx)+c).value = possibleArray[n];
-				console.log( ('c'+rIdx)+c + " "+ possibleArray[n]);
+				reason( 'Only place for ' + possibleArray[n] + ' in column ' + c + ' is ' +('c'+rIdx)+c );
 				document.getElementById(  ('c'+rIdx)+c).style = styleString;
 				return true;
 			}
@@ -272,7 +270,6 @@ function oneInColumn() {
 function oneInRow() {
 	var r, c, v, n, count, cIdx ;
 	
-	console.log('one-in-row');
 	for ( n = 0; n < possibleArray.length; n++ ) {
 		v = possibleArray[n];
 		for ( r = 0; r < boardSize; r++) {
@@ -288,7 +285,7 @@ function oneInRow() {
 			}
 			if ( count == 1 )  {
 				document.getElementById(  ('c'+r)+cIdx).value = possibleArray[n];
-				console.log( ('c'+r)+cIdx + " "+ possibleArray[n]);
+				reason( 'Only place for ' + possibleArray[n] + ' in row ' + r + ' is cell '+('c'+r)+cIdx );
 				document.getElementById(  ('c'+r)+cIdx).style = styleString;
 				return true;
 			}
@@ -297,16 +294,19 @@ function oneInRow() {
 	return false;
 } // oneInRow()
 
+function reason(s){
+	document.getElementById("reasons").innerHTML += s + "\n";
+}
+
 // find and fill in any cells with only one possibility
 function singleton() {
 	var r, c, v;
 	
-	console.log('singletons');
 	for ( r = 0; r < boardSize; r++) {
 		for ( c = 0; c < boardSize; c++ ) {
 			if ( possibleBoard[r][c].length == 1 ) {
 				v = possibleBoard[r][c];
-				console.log( ('c'+r)+c + " "+v[0]);
+				reason( 'Only possibility in cell ' +('c'+r)+c + " is " + v[0]);
 				elem = document.getElementById(  ('c'+r)+c);
 				elem.value = v[0];
 				elem.style = styleString;
@@ -320,11 +320,12 @@ function singleton() {
 	return false;
 } //singleton()
 
+
 function solve() {
 	var r, c, cell;
 	
 	 setSolveBackground('yellow'); // working
-	 console.log('Solving puzzle');
+	 reason('Solving puzzle');
 
 	// check the board
 	if (!boardOk()){
@@ -332,12 +333,12 @@ function solve() {
 		setSolveBackground('red'); // bad
 		return;
 	}
-	console.log( 'deterministic');
+	reason( 'deterministic');
 	if ( !solveDeterministic() ) {
-		console.log( 'not deterministic');
+		reason( 'not deterministic');
 		guesser();
 	}
-	
+	reason('finished!');
 } // solve()
 
 function solveDeterministic() {
