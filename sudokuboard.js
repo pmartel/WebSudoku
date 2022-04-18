@@ -20,6 +20,24 @@ function about() {
 	alert(aboutStr);
 }
 
+function boardString( rLen ) {
+	var s ="";
+	
+	for ( r = 0; r<rLen; r++) {
+		for ( c = 0; c<rLen; c++) { // use rLen for now
+			cell = document.getElementById(('c'+r)+c);
+			v = cell.value;
+			if ( v == ''  || v == ' '){
+				s += '.';
+			} else {
+				s += v;
+			}
+		}
+		s += '\n';
+	}
+	return s;
+}
+
 // The row and column in the explanation (and log) should run from 1-9
 // left to right and top down.  Output a string with fixed row and column
 function displayRC( intR, intC ) {
@@ -136,20 +154,8 @@ function saveBoard() {
 	//	for ( r in b.firstChild ) {
 	var rLen = b.firstChild.children.length;
 	
-	s ="";
-	for ( r = 0; r<rLen; r++) {
-		for ( c = 0; c<rLen; c++) { // use rLen for now
-			cell = document.getElementById(('c'+r)+c);
-			v = cell.value;
-			if ( v == ''  || v == ' '){
-				s += '.';
-			} else {
-				s += v;
-			}
-		}
-		s += '\n';
-	}
-	f.value = s;
+	
+	f.value = boardString(rLen);
 }
 
 function setSolveBackground( c ) {

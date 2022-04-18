@@ -324,9 +324,10 @@ function singleton() {
 function solve() {
 	var r, c, cell;
 	
-	 setSolveBackground('yellow'); // working
-	 reason('Solving puzzle');
-
+	setSolveBackground('yellow'); // working
+	reason('Solving puzzle');
+	reason( boardString( 9 ) ); // some better way to get size?
+	
 	// check the board
 	if (!boardOk()){
 		alert( "This board is in a bad state and can't be solved.\nOne duplicate is marked in red");
